@@ -1,22 +1,14 @@
-import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class Sort {
 
-    public static String SortNames(List<String> names) {
+    public static List<String> SortNames(List<String> names) {
 
-        Collections.sort(names, Collections.reverseOrder());
-
-        StringBuilder result = new StringBuilder();
-
-        for (int i = 0; i < names.size(); i++) {
-            if (result.length() > 0) {
-                result.append (" ");
-            }
-            result.append(names.get(i));
-        }
-
-        return result.toString().toUpperCase();
+        List<String> result = names.stream()
+                        .map(String::toUpperCase)
+                        .sorted((word1, word2) -> word2.compareTo(word1))
+                        .collect(Collectors.toList());
+        return result;
     }
 }
